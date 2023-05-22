@@ -56,6 +56,28 @@ app.post('/users/:userId/email', (req, res) => {
   }
 });
 
+app.put('/users/:userId/posts', (req, res) => {
+  const userId = parseInt(req.params.userId);
+  const { title, body } = req.body;
+  const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
+  const user = data.users.find((user) => user.id === userId);
+
+  if (user) {
+    const newPost = {
+      id: data.posts.length + 1,
+      title,
+      body,
+      user_id: userId,
+      last_update: new Date().toISOString(),
+    };
+    data.posts.push(newPost);
+    fs.writeFileSync('data.json', JSON.stringify(data));
+    res.send('Post created');
+  } else {
+    res.status(404).send('User not found');
+  }
+});
+
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
 });
