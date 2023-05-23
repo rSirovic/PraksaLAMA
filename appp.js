@@ -254,7 +254,6 @@ for (let i = 0; i < subjects.length; i++) {
   
   app.post('/create-excel', async (req, res) => {
   try {
-    // Citaj iz jsona
     const data = JSON.parse(fs.readFileSync('data.json', 'utf8'));
     await createExcelFile(data);
     res.send('Excel file created successfully.');
