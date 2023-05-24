@@ -315,12 +315,11 @@ headerRows.forEach((rowNumber) => {
   });
   
 
-    // Spremanje u datoteku
+    
     await workbook.xlsx.writeFile('output.xlsx');
     console.log('Excel file created successfully.');
   }
 
-// port
 app.listen(3000, () => {
   console.log('API server je pokrenut na portu 3000.');
 });
